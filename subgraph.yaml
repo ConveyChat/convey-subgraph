@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Contract
+    network: kovan
+    source:
+      address: "0xA5F8d814E4399C9F07261329Fba7036CDAF7D647"
+      abi: Contract
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Broadcast
+        - Message
+        - SubscribeBroadcast
+        - UnsubscribeBroadcast
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: Broadcast(indexed address,string)
+          handler: handleBroadcast
+        - event: Message(indexed address,indexed address,string)
+          handler: handleMessage
+        - event: SubscribeBroadcast(indexed address,indexed address)
+          handler: handleSubscribeBroadcast
+        - event: UnsubscribeBroadcast(indexed address,indexed address)
+          handler: handleUnsubscribeBroadcast
+      file: ./src/mapping.ts
