@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
+export class MessageEntity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class ExampleEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save ExampleEntity entity without an ID");
+    assert(id !== null, "Cannot save MessageEntity entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save ExampleEntity entity with non-string ID. " +
+      "Cannot save MessageEntity entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("ExampleEntity", id.toString(), this);
+    store.set("MessageEntity", id.toString(), this);
   }
 
-  static load(id: string): ExampleEntity | null {
-    return store.get("ExampleEntity", id) as ExampleEntity | null;
+  static load(id: string): MessageEntity | null {
+    return store.get("MessageEntity", id) as MessageEntity | null;
   }
 
   get id(): string {
@@ -42,30 +42,96 @@ export class ExampleEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
-    return value.toBigInt();
-  }
-
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
-  }
-
-  get _from(): Bytes {
-    let value = this.get("_from");
+  get sender(): Bytes {
+    let value = this.get("sender");
     return value.toBytes();
   }
 
-  set _from(value: Bytes) {
-    this.set("_from", Value.fromBytes(value));
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
   }
 
-  get message(): string {
-    let value = this.get("message");
+  get receiver(): Bytes | null {
+    let value = this.get("receiver");
+    if (value === null) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set receiver(value: Bytes | null) {
+    if (value === null) {
+      this.unset("receiver");
+    } else {
+      this.set("receiver", Value.fromBytes(value as Bytes));
+    }
+  }
+
+  get ipfsHash(): string {
+    let value = this.get("ipfsHash");
     return value.toString();
   }
 
-  set message(value: string) {
-    this.set("message", Value.fromString(value));
+  set ipfsHash(value: string) {
+    this.set("ipfsHash", Value.fromString(value));
+  }
+}
+
+export class SubscriptionEntity extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save SubscriptionEntity entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save SubscriptionEntity entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("SubscriptionEntity", id.toString(), this);
+  }
+
+  static load(id: string): SubscriptionEntity | null {
+    return store.get("SubscriptionEntity", id) as SubscriptionEntity | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get sender(): Bytes {
+    let value = this.get("sender");
+    return value.toBytes();
+  }
+
+  set sender(value: Bytes) {
+    this.set("sender", Value.fromBytes(value));
+  }
+
+  get subscription(): Bytes {
+    let value = this.get("subscription");
+    return value.toBytes();
+  }
+
+  set subscription(value: Bytes) {
+    this.set("subscription", Value.fromBytes(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
   }
 }
