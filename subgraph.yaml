@@ -6,7 +6,7 @@ dataSources:
     name: Contract
     network: kovan
     source:
-      address: "0xA5F8d814E4399C9F07261329Fba7036CDAF7D647"
+      address: "0x3b53B9ff149117c2fD7A3e4c66E4e4a0F68CeDbD"
       abi: Contract
     mapping:
       kind: ethereum/events
