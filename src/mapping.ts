@@ -17,7 +17,7 @@ export function handleBroadcast(event: Broadcast): void {
 
   entity.id = event.transaction.hash.toHex() + "-" + event.logIndex.toString();
   entity.sender = event.params._from;
-  entity.ipfsHash = event.params.message;
+  entity.mid = event.params._mid;
 
   entity.save();
 }
@@ -32,7 +32,7 @@ export function handleMessage(event: Message): void {
   entity.id = event.transaction.hash.toHex() + "-" + event.logIndex.toString();
   entity.sender = event.params._from;
   entity.receiver = event.params._to;
-  entity.ipfsHash = event.params.message;
+  entity.mid = event.params._mid;
 
   entity.save();
 }

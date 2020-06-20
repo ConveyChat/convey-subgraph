@@ -2,7 +2,7 @@ type MessageEntity @entity {
   id: ID!
   sender: Bytes!
   receiver: Bytes
-  ipfsHash: String!
+  mid: String!
 }
 
 type SubscriptionEntity @entity {

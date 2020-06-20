@@ -27,7 +27,7 @@ export class Broadcast__Params {
     return this._event.parameters[0].value.toAddress();
   }
 
-  get message(): string {
+  get _mid(): string {
     return this._event.parameters[1].value.toString();
   }
 }
@@ -53,7 +53,7 @@ export class Message__Params {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get message(): string {
+  get _mid(): string {
     return this._event.parameters[2].value.toString();
   }
 }
@@ -308,7 +308,7 @@ export class SendMessageCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _ipfsHash(): string {
+  get _mid(): string {
     return this._call.inputValues[1].value.toString();
   }
 }
@@ -317,40 +317,6 @@ export class SendMessageCall__Outputs {
   _call: SendMessageCall;
 
   constructor(call: SendMessageCall) {
-    this._call = call;
-  }
-}
-
-export class _sendMessageCall extends ethereum.Call {
-  get inputs(): _sendMessageCall__Inputs {
-    return new _sendMessageCall__Inputs(this);
-  }
-
-  get outputs(): _sendMessageCall__Outputs {
-    return new _sendMessageCall__Outputs(this);
-  }
-}
-
-export class _sendMessageCall__Inputs {
-  _call: _sendMessageCall;
-
-  constructor(call: _sendMessageCall) {
-    this._call = call;
-  }
-
-  get _receiver(): Address {
-    return this._call.inputValues[0].value.toAddress();
-  }
-
-  get _ipfsHash(): string {
-    return this._call.inputValues[1].value.toString();
-  }
-}
-
-export class _sendMessageCall__Outputs {
-  _call: _sendMessageCall;
-
-  constructor(call: _sendMessageCall) {
     this._call = call;
   }
 }
@@ -372,7 +338,7 @@ export class SendBroadcastCall__Inputs {
     this._call = call;
   }
 
-  get _ipfsHash(): string {
+  get _mid(): string {
     return this._call.inputValues[0].value.toString();
   }
 }
@@ -381,36 +347,6 @@ export class SendBroadcastCall__Outputs {
   _call: SendBroadcastCall;
 
   constructor(call: SendBroadcastCall) {
-    this._call = call;
-  }
-}
-
-export class _sendBroadcastCall extends ethereum.Call {
-  get inputs(): _sendBroadcastCall__Inputs {
-    return new _sendBroadcastCall__Inputs(this);
-  }
-
-  get outputs(): _sendBroadcastCall__Outputs {
-    return new _sendBroadcastCall__Outputs(this);
-  }
-}
-
-export class _sendBroadcastCall__Inputs {
-  _call: _sendBroadcastCall;
-
-  constructor(call: _sendBroadcastCall) {
-    this._call = call;
-  }
-
-  get _ipfsHash(): string {
-    return this._call.inputValues[0].value.toString();
-  }
-}
-
-export class _sendBroadcastCall__Outputs {
-  _call: _sendBroadcastCall;
-
-  constructor(call: _sendBroadcastCall) {
     this._call = call;
   }
 }

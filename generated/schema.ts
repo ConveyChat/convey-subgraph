@@ -68,13 +68,13 @@ export class MessageEntity extends Entity {
     }
   }
 
-  get ipfsHash(): string {
-    let value = this.get("ipfsHash");
+  get mid(): string {
+    let value = this.get("mid");
     return value.toString();
   }
 
-  set ipfsHash(value: string) {
-    this.set("ipfsHash", Value.fromString(value));
+  set mid(value: string) {
+    this.set("mid", Value.fromString(value));
   }
 }
 
